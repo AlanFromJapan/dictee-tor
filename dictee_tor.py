@@ -1,4 +1,3 @@
-import random
 import logging
 import os
 
@@ -7,7 +6,7 @@ from flask import Flask, redirect, render_template, current_app, session
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import myconfig
-
+import dbutils
 
 ########################################################################################
 ## Flask vars
@@ -47,7 +46,9 @@ def init_session():
 @app.route('/')
 @app.route('/home')
 def homepage():
-    return render_template("home01.html", pagename="Home", **current_app.global_render_template_params)
+    wc_total, _, wc_years, wc_weeksperyear = dbutils.db_stats()
+
+    return render_template("home01.html", pagename="Home", stats=(wc_total, wc_years, wc_weeksperyear), **current_app.global_render_template_params)
 
 
 @app.before_request
@@ -70,6 +71,9 @@ if __name__ == '__main__':
         logging.basicConfig(filename=myconfig.get("logfile", "/tmp/dictee-tor.log"), level=myconfig.get("loglevel", logging.INFO))
 
         app.logger.warning("Starting the app")
+
+        #init the database
+        dbutils.init(myconfig["database"])
 
         #start web interface
         app.debug = True

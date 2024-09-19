@@ -22,6 +22,23 @@ def random_word(year, week=None, lang=None):
     return None
 
 
+#returns useful stats about the database
+def db_stats():
+    con = sqlite3.connect(__DB_FILE)
+    cur = con.cursor()
+    cur.execute("SELECT count(*) FROM word")
+    wc = cur.fetchone()
+    cur.execute("SELECT count(*) FROM word WHERE language='fr'")
+    wcfr = cur.fetchone()
+    cur.execute("SELECT year, count(1) FROM word group by year")
+    wcyears = cur.fetchall()
+    cur.execute("SELECT DISTINCT year, week FROM word ORDER BY year, week")
+    wcweeksperyear = cur.fetchall()
+    con.close()
+    
+    return wc[0], wcfr[0], wcyears, wcweeksperyear
+
+
 #----------------------------------------------------------
 # Test the dbutils.py
 #----------------------------------------------------------
@@ -35,3 +52,5 @@ if __name__ == '__main__':
     print("Random word with some params")
     print(random_word("ce1", lang='fr'))
 
+    print("Stats")
+    print(db_stats())

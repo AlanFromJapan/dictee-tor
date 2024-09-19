@@ -8,5 +8,19 @@ By AlanFromJapan / MIT license / Full source code here <a href="https://github.c
 A web application using speech to text to have your kids practice "dictee" (dictation).
 <br/>
 
+<ul>
+    <li>Total words in database : <span class="home_stat">{{ stats[0] }}</span></li>
+    <li>Years available in database : <span class="home_stat">{{ stats[1]|length }}</span></li>
+    <li>weeks available in database (total) : <span class="home_stat">{{ stats[2]|length }}</span></li>
+</ul>
+
+<select type="text" id="colorSelect" name="colorSelect">
+    <option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option>
+{% for year_week in stats[2] %}
+    <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
+{% endfor %}
+
+</select>
+
 {{ dbg }}
 {% endblock %}

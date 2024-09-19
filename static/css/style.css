@@ -133,6 +133,9 @@ table.gameslist tr td{
     color: goldenrod;
 }
 
+span.home_stat{
+    color: goldenrod;
+}
 /*--------------------------------------------------------------------------------------------------------*/
 /* GameA : Initiale */
 /* Good doc about alignment https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
