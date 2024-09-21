@@ -23,11 +23,14 @@ myconfig = {
     #uppercase or lowercase
     "lettercase" : "lowercase",
 
-    #VoiceRSS key for speech to text
+    #VoiceRSS key for speech to text [https://voicerss.org/api/]
     "VoiceRSS key" : "your key here",
 
+    #VoiceRSS speed: The speech rate (speed). Allows values: from -10 (slowest speed) up to 10 (fastest speed). Default value: 0 (normal speed).
+    "VoiceRSS speed" : -3,
+
     #where is the logfile
-    "logfile" : "/tmp/poke-trainer.log",
+    "logfile" : "/tmp/dictee-tor.log",
 
     #log level
     "loglevel" : logging.INFO,

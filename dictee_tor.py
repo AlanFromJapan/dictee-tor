@@ -1,5 +1,6 @@
 import logging
 import os
+import requests
 
 from flask import Flask, redirect, render_template, current_app, session, request
 #running behind proxy?                                                                                            
@@ -24,6 +25,30 @@ if myconfig.get("BehindProxy", False):
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'ico'])
 
+########################################################################################
+## Other non-web related functions
+#
+#-----------------------------------------------------------------------
+#Indirection so I can keep the API key on server side (useless, but I don't want to expose it)
+@app.route("/api/speech2text/<lang>/<message>", methods=['GET'])
+def speech_to_text(lang, message):
+    logging.info(f"S2T: {lang} - '{message}'")
+    
+    #The API expects a specific locale "fr-fr", "ja-jp", "ko-kr" and not just a language code on 2 letters
+    locale =  "fr-fr" if lang == "fr" else "ja-jp" if lang == "jp" else "ko-kr"
+
+    try:
+        speed_factor = myconfig.get("VoiceRSS speed", 0)
+        url = f"https://api.voicerss.org/?key={myconfig['VoiceRSS key']}&hl={locale}&c=MP3&v=Zola&f=16khz_16bit_mono&r={speed_factor}&src={message}"
+        logging.debug(f"URL for S2T: {url}")
+        req = requests.Request('GET', url)
+        prepared = req.prepare()
+        resp = requests.Session().send(prepared, stream=True, verify=myconfig["SSL_CHECK"])
+    
+        return resp.raw.read(), resp.status_code, resp.headers.items()
+    except Exception as e:
+        logging.error(f"Error in speech_to_text: {str(e)}")
+        return None, 500, None
 
 ########################################################################################
 ## Web related functions
@@ -49,6 +74,9 @@ def init_session():
 @app.route('/home')
 def homepage():
     wc_total, _, wc_years, wc_weeksperyear = dbutils.db_stats()
+
+    #ensure next dictation will start from the beginning
+    session["dictee word count"] <= -1
 
     return render_template("home01.html", pagename="Home", stats=(wc_total, wc_years, wc_weeksperyear), **current_app.global_render_template_params)
 
