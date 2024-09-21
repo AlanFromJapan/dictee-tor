@@ -20,8 +20,9 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
         <td>
             <span class="title">Dictee de la semaine</span>
             Choisissez une semaine et pratiquez les mots de <strong>cette semaine</strong>.<br/>
-
-            <select type="text" id="colorSelect" name="colorSelect">
+            <br/>
+            <select type="text" id="colorSelect" name="colorSelect" onchange="goToDictee('single', this.options[this.selectedIndex].value)">
+                <option selected="selected" value="">[Choisis une dictee]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
                 <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
@@ -36,8 +37,9 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
         <td>
             <span class="title">Dictee de revision</span>
             Choisissez une semaine et pratiquez des mots <strong>du debut de l'annee jusqu'a cette semaine</strong>.<br/>
-
-            <select type="text" id="colorSelect" name="colorSelect">
+            <br/>
+            <select type="text" id="colorSelect" name="colorSelect" onchange="goToDictee('revision', this.options[this.selectedIndex].value)">
+                <option selected="selected" value="">[Choisis une dictee]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
                 <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
@@ -50,5 +52,13 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
     </tr>
 </table>
 
+
+<script lang="javascript">
+    
+    function goToDictee(dicteeType, selectedWeek){
+        if (selectedWeek != "")
+            window.location.href = `dictee?selected=${selectedWeek}&type=${dicteeType}`;
+    }
+</script>
 {{ dbg }}
 {% endblock %}

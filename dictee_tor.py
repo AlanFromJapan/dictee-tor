@@ -56,6 +56,9 @@ def set_global_variables():
     current_app.global_render_template_params = {} 
 
 
+@app.route("/dictee")
+def dictee_page():
+    return render_template("dictee01.html", title="dictee xyz", **current_app.global_render_template_params)
 
 
 ########################################################################################

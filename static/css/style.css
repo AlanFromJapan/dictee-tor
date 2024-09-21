@@ -29,8 +29,8 @@
 /*--------------------------------------------------------------------------------------------------------*/
 
 body {
-    background-color: midnightblue;
-    color: whitesmoke;
+    background-color: #000070;
+    color: #d8DBE2;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -117,12 +117,12 @@ table.header a:hover {
 span.homewelcome{
     font-weight: bold;
     font-size: xx-large;
-    color: goldenrod;
+    color: #DAA49A;
 }
 
 
 table.activities tr td{
-    border: solid 2px goldenrod;
+    border: solid 2px #58A4B0;
     height: 220px;
     width: 300px;
     vertical-align: top;
@@ -132,7 +132,7 @@ table.activities tr td{
 table.activities * .title {
     font-weight: bold;
     font-size: larger;
-    color: goldenrod;
+    color: #DAA49A;
 }
 
 table.activities * .title::after {
@@ -140,8 +140,15 @@ table.activities * .title::after {
     white-space: pre;
 }
 
+
+table.activities * select {
+    width: 250px;
+    text-align: center;
+    font-size: x-large;
+}
+
 span.home_stat{
-    color: goldenrod;
+    color: #58A4B0;
 }
 
 

@@ -26,12 +26,6 @@ function switchLanguage(l){
 
     //https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
     var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //         var d = document.getElementById('currentstatus');
-    //         d.innerHTML = this.responseText.replace('\n', '<br/>');
-    //         }
-    // };
     xhttp.open("PUT", "api/language/" + l, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
@@ -42,12 +36,6 @@ function switchLetterStyle(l){
 
     //https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
     var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //         var d = document.getElementById('currentstatus');
-    //         d.innerHTML = this.responseText.replace('\n', '<br/>');
-    //         }
-    // };
     xhttp.open("PUT", "api/letterstyle/" + l, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
@@ -59,12 +47,6 @@ function switchLetterCase(l){
 
     //https://stackoverflow.com/questions/36975619/how-to-call-a-rest-web-service-api-from-javascript
     var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //         var d = document.getElementById('currentstatus');
-    //         d.innerHTML = this.responseText.replace('\n', '<br/>');
-    //         }
-    // };
     xhttp.open("PUT", "api/lettercase/" + l, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
