@@ -5,6 +5,9 @@ myconfig = {
     #This is the path to the database file. It should be a sqlite3 file.
     "database" : "db/wordslist.db",
 
+    #This is the number of words in a dictation session
+    "dictee word count" : 10,
+
     #This is the language of the words in the database
     "language" : "fr",
 

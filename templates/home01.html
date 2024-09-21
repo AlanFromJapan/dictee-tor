@@ -57,7 +57,7 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
     
     function goToDictee(dicteeType, selectedWeek){
         if (selectedWeek != "")
-            window.location.href = `dictee?selected=${selectedWeek}&type=${dicteeType}`;
+            window.location.href = `dictee?weekid=${selectedWeek}&mode=${dicteeType}`;
     }
 </script>
 {{ dbg }}

@@ -1,7 +1,7 @@
 import logging
 import os
 
-from flask import Flask, redirect, render_template, current_app, session
+from flask import Flask, redirect, render_template, current_app, session, request
 #running behind proxy?                                                                                            
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -39,6 +39,8 @@ def init_session():
         session["letterstyle"] = myconfig["letterstyle"]
     if "lettercase" not in session:
         session["lettercase"] = myconfig["lettercase"]
+    if "dictee word count" not in session:
+        session["dictee word count"] = myconfig["dictee word count"]
 
         
 
@@ -58,7 +60,32 @@ def set_global_variables():
 
 @app.route("/dictee")
 def dictee_page():
-    return render_template("dictee01.html", title="dictee xyz", **current_app.global_render_template_params)
+    if session["dictee word count"] == 0:
+        #finished
+        session["dictee word count"] = -1
+        content = "Resultat de la dictee ..."
+        return render_template("template01.html", title="dictee xyz", pagecontent=content, **current_app.global_render_template_params)    
+
+    if session["dictee word count"] <= -1:
+        #restart
+        session["dictee word count"] = myconfig["dictee word count"]
+
+    #dec
+    session["dictee word count"] -= 1
+
+    #get a word
+    word = None
+    mode = request.args.get("mode", "single")
+    year, week = request.args.get("weekid", "ce1-1").split("-")
+
+    if mode == "single":
+        #get a word from the selected week
+        word = dbutils.random_word(year, week=week, lang=session["language"])
+    else:
+        #get a word from the selected year UP TO the selected week included
+        word = dbutils.random_word(year, maxweek=week,lang=session["language"])
+    
+    return render_template("dictee01.html", title="Dictee de la semaine" if mode == "single" else "Dictee de revision", word=word, **current_app.global_render_template_params)
 
 
 ########################################################################################
