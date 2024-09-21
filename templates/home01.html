@@ -3,9 +3,10 @@
 {% block pagename %} Homepage {% endblock %}
 
 {% block contents %} 
-<span class="homewelcome">Welcome to Dictee-Tor</span><br/>
+<span class="homewelcome">Bienvenue sur Dictee-Tor</span><br/>
 By AlanFromJapan / MIT license / Full source code here <a href="https://github.com/AlanFromJapan/dictee-tor">on Github</a>.<br/>
-A web application using speech to text to have your kids practice "dictee" (dictation).
+<br/>
+Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-meme.
 <br/>
 
 <ul>
@@ -14,13 +15,40 @@ A web application using speech to text to have your kids practice "dictee" (dict
     <li>weeks available in database (total) : <span class="home_stat">{{ stats[2]|length }}</span></li>
 </ul>
 
-<select type="text" id="colorSelect" name="colorSelect">
-    <option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option>
-{% for year_week in stats[2] %}
-    <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
-{% endfor %}
+<table class="activities">
+    <tr>
+        <td>
+            <span class="title">Dictee de la semaine</span>
+            Choisissez une semaine et pratiquez les mots de <strong>cette semaine</strong>.<br/>
 
-</select>
+            <select type="text" id="colorSelect" name="colorSelect">
+                <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
+            {% for year_week in stats[2] %}
+                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
+            {% endfor %}
+            
+            </select>
+            
+
+        </td>
+        <!-- ============================================================================================================= -->
+    
+        <td>
+            <span class="title">Dictee de revision</span>
+            Choisissez une semaine et pratiquez des mots <strong>du debut de l'annee jusqu'a cette semaine</strong>.<br/>
+
+            <select type="text" id="colorSelect" name="colorSelect">
+                <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
+            {% for year_week in stats[2] %}
+                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
+            {% endfor %}
+            
+            </select>
+            
+
+        </td>
+    </tr>
+</table>
 
 {{ dbg }}
 {% endblock %}
