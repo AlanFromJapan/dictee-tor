@@ -30,8 +30,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'ico'])
 #
 #-----------------------------------------------------------------------
 #Indirection so I can keep the API key on server side (useless, but I don't want to expose it)
-@app.route("/api/speech2text/<lang>/<message>", methods=['GET'])
-def speech_to_text(lang, message):
+@app.route("/api/text2speech/<lang>/<message>", methods=['GET'])
+def text_to_speech(lang, message):
     logging.info(f"S2T: {lang} - '{message}'")
     
     #The API expects a specific locale "fr-fr", "ja-jp", "ko-kr" and not just a language code on 2 letters
@@ -47,7 +47,7 @@ def speech_to_text(lang, message):
     
         return resp.raw.read(), resp.status_code, resp.headers.items()
     except Exception as e:
-        logging.error(f"Error in speech_to_text: {str(e)}")
+        logging.error(f"Error in text_to_speech: {str(e)}")
         return None, 500, None
 
 ########################################################################################

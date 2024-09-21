@@ -55,8 +55,8 @@ function switchLetterCase(l){
 var lastAudio = null;
 
 //plays the audio for the text
-function speech2textAPI(lang, text){
-    var url = "api/speech2text/" + lang + "/" + text;
+function text2speechAPI(lang, text){
+    var url = "api/text2speech/" + lang + "/" + text;
     const audioElement = new Audio(url);
     audioElement.play();
 
