@@ -4,7 +4,7 @@ A web application using speech to text to have your kids practice "dictee" (dict
 ![Homepage](/images/home.png?raw=true) ![Results](/images/result.png?raw=true)
 
 ## Name 
-Dictee is French for dicatation so ... "Dictator" ... got it? Mwahaha ! 🤣 Yeah it s*cks but I was short on nice name.
+Dictee is French for dictation so ... "Dicta-tor" ... got it? Mwahaha ! 🤣 Yeah it s*cks but I was short on nice name.
 
 ## Motivation
 I have young kids learning French, and my son wanted to be able to run his weekly dication by himself. Once I explained him that him *reading* the words would not make sense in a dictation exercise, I got to think of how I could help him. 
