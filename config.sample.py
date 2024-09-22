@@ -1,5 +1,6 @@
 
 import logging
+import os
 
 myconfig = {
     #This is the path to the database file. It should be a sqlite3 file.
@@ -24,7 +25,9 @@ myconfig = {
     "lettercase" : "lowercase",
 
     #VoiceRSS key for speech to text [https://voicerss.org/api/]
-    "VoiceRSS key" : "your key here",
+    #You can get a free key for 350 requests per day
+    #If environment variable VOICERSS_KEY is set, it will be used instead of the hardcoded key
+    "VoiceRSS key" : os.getenv('VOICERSS_KEY', "your key here"),
 
     #VoiceRSS speed: The speech rate (speed). Allows values: from -10 (slowest speed) up to 10 (fastest speed). Default value: 0 (normal speed).
     "VoiceRSS speed" : -3,

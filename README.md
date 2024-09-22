@@ -20,9 +20,13 @@ Pick one week and practice the words of *the begining of the year until that wee
 
 # Installation
 ## Mandatory - Need to get you key for Voice RSS
-The Text-to-Speech API used is **Voice RSS API**. Go to the Login page https://voicerss.org/login.aspx, create an account, and get your *token*.
+The Text-to-Speech API used is **Voice RSS API**. Go to the Login page https://voicerss.org/login.aspx, create a free account, and get your *token*. The free account allows for 350 calls per day, which should be enough, but feel free to subscribe!
 
 Then update your *config.py* (copied from *config.sample.py*): "VoiceRSS key" : "*your key here*"
+
+**OR**
+
+You can set the environment variable *VOICERSS_KEY* on the server or the Docker container.
 
 ## Manual install
 1. git clone https://github.com/AlanFromJapan/dictee-tor
@@ -36,9 +40,10 @@ Then update your *config.py* (copied from *config.sample.py*): "VoiceRSS key" : 
 
 ## Docker container version
 Assuming you have Docker working on your PC:
-1. git clone https://github.com/AlanFromJapan/dictee-tor
-1. copy config.sample.py config.py
+1. `git clone https://github.com/AlanFromJapan/dictee-tor`
+1. `copy config.sample.py config.py`
 1. EDIT YOUR Voice RSS token (see above↑) + other values of config.py
-1. docker build -t dictee-tor .
-1. docker run --name dictee-container -d dictee-tor
+1. `docker build -t dictee-tor .`
+1. `docker run --name dictee-container --env VOICERSS_KEY=<your_voicerss_token> -d dictee-tor`
+    - In case you provide the environment variable, it will override whatever is in the config file. Pick according your usecase.
 
