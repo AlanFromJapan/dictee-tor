@@ -4,7 +4,7 @@
 
 {% block contents %} 
 <h1>{{ title }} ({{session["dictee year"] | upper }} semaine {{session["dictee week"]}})</h1>
-<h2>Mot {{ session["current word count"] }} sur {{ session["max word count"] }}</h2>
+<h2>Mot {{ session["max word count"] - session["current word count"] }} sur {{ session["max word count"] }}</h2>
     <!-- {{word}} -->
 
 

@@ -157,6 +157,10 @@ span.home_stat{
     color: #58A4B0;
 }
 
+.acknowledgements {
+    font-size: small;
+    color:grey;
+}
 /*--------------------------------------------------------------------------------------------------------*/
 /* Results */
 ol.results {
