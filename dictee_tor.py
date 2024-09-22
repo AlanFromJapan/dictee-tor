@@ -146,6 +146,10 @@ def dictee_result_page():
     return render_template("results01.html", title="Dictée de la semaine" if mode == "single" else "Dictée de révision", pagecontent=content, results=session["wordslist"], **current_app.global_render_template_params)    
 
 
+@app.route("/help")
+def help_page():
+    return render_template("help01.html", pagename="Help", **current_app.global_render_template_params)
+
 ########################################################################################
 ## Main entry point
 #
