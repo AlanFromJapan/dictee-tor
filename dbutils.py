@@ -16,6 +16,21 @@ def init(db_file):
 # maxweek: The maximum week (included) to get the word from (for the revision)
 # Return: (word, year, week, language)
 def random_word(year, week=None, lang=None, maxweek=None):
+    words = all_words(year, week, lang, maxweek)
+
+    if len(words) > 0:
+        return words[random.randint(0, len(words)-1)]
+    return None
+
+
+#Get ALL words from the database according to the parameters
+# Params:
+# year: The year of the word
+# week: The week of the word (for the single revision)
+# lang: The language of the word
+# maxweek: The maximum week (included) to get the word from (for the revision)
+# Return: (word, year, week, language)
+def all_words(year, week=None, lang=None, maxweek=None):
     con = sqlite3.connect(__DB_FILE)
     cur = con.cursor()
 
@@ -33,9 +48,7 @@ WHERE
     words = cur.fetchall()
     con.close()
 
-    if len(words) > 0:
-        return words[random.randint(0, len(words)-1)]
-    return None
+    return words
 
 
 #returns useful stats about the database
@@ -60,6 +73,11 @@ def db_stats():
 #----------------------------------------------------------
 if __name__ == '__main__':
     init("db/wordslist.db")
+
+    print("All words for a week")
+    print(all_words("ce1", 2, 'fr'))
+    print("All words UP TO a week")
+    print(all_words("ce1", lang='fr', maxweek=3))
 
     print("Random word with all params")
     print(random_word("ce1", 1, 'fr'))

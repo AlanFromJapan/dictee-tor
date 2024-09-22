@@ -3,17 +3,20 @@
 {% block pagename %} Dictee {% endblock %}
 
 {% block contents %} 
-<h1>{{ title }}</h1>
+<h1>{{ title }} ({{session["dictee year"] | upper }} semaine {{session["dictee week"]}})</h1>
+<h2>Mot {{ session["current word count"] }} sur {{ session["max word count"] }}</h2>
     <!-- {{word}} -->
 
 
 
-<button onClick="javascript:replayLatestAudio();">Ecouter encore</button> / <button onClick="location.reload();">Passer au suivant</button> / on arrete ici.
+<button onClick="javascript:replayLatestAudio();">Ecouter encore</button> / <button onClick="location.reload();">Passer au suivant</button> / <button onClick="window.location.href='home';">On arrête ici</button>
 
-
+{% autoescape false %}
 <script lang="javascript">
     //run the speech 2 text API on load (language and word)
     text2speechAPI("{{ word[3] }}", "{{ word[0] }}");
 </script>
-{{ dbg }}
+{% endautoescape %}  
+
+<pre>{{ dbg }}</pre>
 {% endblock %}

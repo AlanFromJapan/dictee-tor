@@ -1,0 +1,27 @@
+{% extends 'master01.html' %}
+
+{% block pagename %} {{ title }} {% endblock %}
+
+{% block contents %} 
+
+<h1>{{ title }}</h1>
+
+{% autoescape false %}
+  {{ pagecontent }}
+{% endautoescape %}  
+
+<ol class="results">
+  {% for result in results %}
+  <li>{{result[0]}}&nbsp;&nbsp;<span class='caligraphie'>{{result[0]}}</span></li>
+  {% endfor %}
+</ol>
+
+<div class="center_me">
+  <button onClick="window.location.href='new_dictee?mode={{session["dictee mode"]}}&weekid={{session["dictee year"]}}-{{session["dictee week"]}}';">Recommencer la même!</button>&nbsp;&nbsp;<button onClick="window.location.href='home';">Une autre!</button>
+</div>
+
+{% endblock %}
+
+{% block debug %}
+{{ dbg }}
+{% endblock %}

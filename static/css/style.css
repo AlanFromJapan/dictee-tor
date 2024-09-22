@@ -1,19 +1,11 @@
 /* Free fonts from https://www.1001freefonts.com/ */
 @font-face {
-    font-family: "xmas";
-    src: url("/fonts/Christmas Time Personal Use.ttf");
-}
-@font-face {
-    font-family: "janda";
-    src: url("/fonts/JandaAsLongAsYouLoveMe.ttf");
-}
-@font-face {
-    font-family: "rouge";
-    src: url("/fonts/RougeScript-Regular.ttf");
+    font-family: "ronde";
+    src: url("/fonts/SimpleRonde-Regular.ttf");
 }
 
 *.cursive {
-    font-family: "janda";
+    font-family: "ronde";
     text-transform: lowercase;
 }
 *.block {
@@ -45,6 +37,20 @@ div.footer{
     width:100%;
     background-color: #303030;
 
+}
+
+button {
+    background-color: #303030;
+    color: #d8DBE2;
+    border: 1px solid #d8DBE2;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+
+    font-weight: x-large;
+    height: 50px;
+    min-width: 150px;
 }
 
 
@@ -151,9 +157,19 @@ span.home_stat{
     color: #58A4B0;
 }
 
+/*--------------------------------------------------------------------------------------------------------*/
+/* Results */
+ol.results {
+    font-size: x-large;    
+}
 
-/* ----------------------------- Listening -------------------------------------- */
-button.replaySound {
-    width: 200px;
-    height: 200px;
+ol.results .caligraphie{
+    font-family: "ronde";
+    font-size: xx-large;
+    color: #DAA49A;
+}
+
+div.center_me {
+    width: 100%;
+    text-align: center;    
 }

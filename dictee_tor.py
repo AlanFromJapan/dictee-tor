@@ -1,6 +1,7 @@
 import logging
 import os
 import requests
+import random
 
 from flask import Flask, redirect, render_template, current_app, session, request
 #running behind proxy?                                                                                            
@@ -64,8 +65,6 @@ def init_session():
         session["letterstyle"] = myconfig["letterstyle"]
     if "lettercase" not in session:
         session["lettercase"] = myconfig["lettercase"]
-    if "dictee word count" not in session:
-        session["dictee word count"] = myconfig["dictee word count"]
 
         
 
@@ -75,9 +74,6 @@ def init_session():
 def homepage():
     wc_total, _, wc_years, wc_weeksperyear = dbutils.db_stats()
 
-    #ensure next dictation will start from the beginning
-    session["dictee word count"] <= -1
-
     return render_template("home01.html", pagename="Home", stats=(wc_total, wc_years, wc_weeksperyear), **current_app.global_render_template_params)
 
 
@@ -86,34 +82,68 @@ def set_global_variables():
     current_app.global_render_template_params = {} 
 
 
-@app.route("/dictee")
-def dictee_page():
-    if session["dictee word count"] == 0:
-        #finished
-        session["dictee word count"] = -1
-        content = "Resultat de la dictee ..."
-        return render_template("template01.html", title="dictee xyz", pagecontent=content, **current_app.global_render_template_params)    
-
-    if session["dictee word count"] <= -1:
-        #restart
-        session["dictee word count"] = myconfig["dictee word count"]
-
-    #dec
-    session["dictee word count"] -= 1
-
-    #get a word
-    word = None
+@app.route("/new_dictee")
+def new_dictee_page():
+    #get the words list
+    words = None
     mode = request.args.get("mode", "single")
     year, week = request.args.get("weekid", "ce1-1").split("-")
 
     if mode == "single":
         #get a word from the selected week
-        word = dbutils.random_word(year, week=week, lang=session["language"])
+        words = dbutils.all_words(year, week=week, lang=session["language"])
     else:
         #get a word from the selected year UP TO the selected week included
-        word = dbutils.random_word(year, maxweek=week,lang=session["language"])
-    
-    return render_template("dictee01.html", title="Dictee de la semaine" if mode == "single" else "Dictee de revision", word=word, **current_app.global_render_template_params)
+        words = dbutils.all_words(year, maxweek=week,lang=session["language"])
+
+    #How many words to ask: the minimum between the number of words in the list and the number of words to ask (no duplicates)
+    session["max word count"] = min(len(words), myconfig["dictee word count"])
+    session["current word count"] = session["max word count"]
+
+    #shorten the list if too long (after mixing)
+    random.shuffle(words)  
+    words = words[:session["current word count"]]
+
+    #the words list is stored in the session
+    session["wordslist"] = words
+
+    session["dictee mode"] = mode
+    session["dictee year"] = year
+    session["dictee week"] = week
+
+    session.modified = True
+
+    return redirect(f"/dictee")
+
+
+@app.route("/dictee")
+def dictee_page():
+    if session["current word count"] <= 1:
+        #finished
+        return redirect("/dictee_result")
+
+    #dec
+    session["current word count"] -= 1
+    #pop and requeue (assume already shuffled) => processed words are requeued so they can be shown in order at the end
+    word = session["wordslist"].pop(0)
+    session["wordslist"].append(word)
+
+    session.modified = True
+
+    mode = session["dictee mode"]
+    return render_template("dictee01.html",  title="Dictée de la semaine" if mode == "single" else "Dictée de révision", word=word, **current_app.global_render_template_params)
+
+
+@app.route("/dictee_result")
+def dictee_result_page():
+    content = ""
+    content += f"Mode: {session['dictee mode']}<br/>"
+    content += f"Annee: {session['dictee year']}<br/>"
+    content += f"Semaine: {session['dictee week']}<br/>"
+    content += f"Langue: {session['language']}<br/>"
+
+    mode = session["dictee mode"]
+    return render_template("results01.html", title="Dictée de la semaine" if mode == "single" else "Dictée de révision", pagecontent=content, results=session["wordslist"], **current_app.global_render_template_params)    
 
 
 ########################################################################################

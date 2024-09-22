@@ -6,7 +6,7 @@
 <span class="homewelcome">Bienvenue sur Dictee-Tor</span><br/>
 By AlanFromJapan / MIT license / Full source code here <a href="https://github.com/AlanFromJapan/dictee-tor">on Github</a>.<br/>
 <br/>
-Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-meme.
+Une petite application pour aider vos enfants a s'entrainer a la dictée par eux-même.
 <br/>
 
 <ul>
@@ -18,11 +18,11 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
 <table class="activities">
     <tr>
         <td>
-            <span class="title">Dictee de la semaine</span>
+            <span class="title">Dictée de la semaine</span>
             Choisissez une semaine et pratiquez les mots de <strong>cette semaine</strong>.<br/>
             <br/>
             <select type="text" id="colorSelect" name="colorSelect" onchange="goToDictee('single', this.options[this.selectedIndex].value)">
-                <option selected="selected" value="">[Choisis une dictee]</option>
+                <option selected="selected" value="">[Choisis une dictée]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
                 <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
@@ -35,11 +35,11 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
         <!-- ============================================================================================================= -->
     
         <td>
-            <span class="title">Dictee de revision</span>
-            Choisissez une semaine et pratiquez des mots <strong>du debut de l'annee jusqu'a cette semaine</strong>.<br/>
+            <span class="title">Dictée de revision</span>
+            Choisissez une semaine et pratiquez des mots <strong>du début de l'année jusqu'à cette semaine</strong>.<br/>
             <br/>
             <select type="text" id="colorSelect" name="colorSelect" onchange="goToDictee('revision', this.options[this.selectedIndex].value)">
-                <option selected="selected" value="">[Choisis une dictee]</option>
+                <option selected="selected" value="">[Choisis une dictée]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
                 <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
@@ -57,7 +57,7 @@ Une petite application pour aider vos enfants a s'entrainer a la dictee par eux-
     
     function goToDictee(dicteeType, selectedWeek){
         if (selectedWeek != "")
-            window.location.href = `dictee?weekid=${selectedWeek}&mode=${dicteeType}`;
+            window.location.href = `new_dictee?weekid=${selectedWeek}&mode=${dicteeType}`;
     }
 </script>
 {{ dbg }}
