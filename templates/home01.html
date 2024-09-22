@@ -25,7 +25,7 @@ Une petite application pour aider vos enfants a s'entrainer a la dictée par eux
                 <option selected="selected" value="">[Choisis une dictée]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
-                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
+                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] | upper }} - semaine {{ year_week[1] }}</option>
             {% endfor %}
             
             </select>
@@ -42,7 +42,7 @@ Une petite application pour aider vos enfants a s'entrainer a la dictée par eux
                 <option selected="selected" value="">[Choisis une dictée]</option>
                 <!--option selected="selected" value="{{ stats[2][0][0] }}-random">{{ stats[2][0][0] }} - random week!</option-->
             {% for year_week in stats[2] %}
-                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] }} - week {{ year_week[1] }}</option>
+                <option value="{{ year_week[0] }}-{{ year_week[1] }}">{{ year_week[0] | upper }} - semaine {{ year_week[1] }}</option>
             {% endfor %}
             
             </select>

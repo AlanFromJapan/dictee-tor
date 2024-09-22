@@ -20,6 +20,10 @@ function clickConfirm(pname, pvalue, pmessage="Sure ?") {
 }
 
 
+function areYouSure() {
+    return confirm("Êtes-vous sûr ?");
+}
+
 
 //changes the language
 function switchLanguage(l){

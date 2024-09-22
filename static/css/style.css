@@ -169,6 +169,12 @@ ol.results .caligraphie{
     color: #DAA49A;
 }
 
+ol.results .seenWeek{
+    font-size: small;
+    font-style: italic;
+    color: #58A4B0;
+}
+
 div.center_me {
     width: 100%;
     text-align: center;    

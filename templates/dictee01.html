@@ -1,6 +1,6 @@
 {% extends 'master01.html' %}
 
-{% block pagename %} Dictee {% endblock %}
+{% block pagename %} Dictée {% endblock %}
 
 {% block contents %} 
 <h1>{{ title }} ({{session["dictee year"] | upper }} semaine {{session["dictee week"]}})</h1>
@@ -9,7 +9,7 @@
 
 
 
-<button onClick="javascript:replayLatestAudio();">Ecouter encore</button> / <button onClick="location.reload();">Passer au suivant</button> / <button onClick="window.location.href='home';">On arrête ici</button>
+<button onClick="javascript:replayLatestAudio();">👂 Écouter encore</button> / <button onClick="location.reload();">⏭️ Passer au suivant</button> / <button onClick="if (areYouSure()) {window.location.href='home';}">🖐️ On arrête ici</button>
 
 {% autoescape false %}
 <script lang="javascript">

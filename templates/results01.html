@@ -12,7 +12,7 @@
 
 <ol class="results">
   {% for result in results %}
-  <li>{{result[0]}}&nbsp;&nbsp;<span class='caligraphie'>{{result[0]}}</span></li>
+  <li>{{result[0]}}&nbsp;&nbsp;<span class='caligraphie'>{{result[0]}}</span> {% if result[2] != session["dictee week"] %}<span class="seenWeek">(vu en semaine {{result[2]}})</span> {% endif%}</li>
   {% endfor %}
 </ol>
 
