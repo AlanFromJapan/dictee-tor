@@ -14,4 +14,4 @@ RUN adduser --disabled-password --gecos '' --no-create-home  webuser
 USER webuser
 
 #Run the application (-u is to avoid buffering)
-CMD ["python", "-u", "dictee-tor.py"]
+CMD ["python", "-u", "dictee_tor.py"]
