@@ -28,6 +28,10 @@ Then update your *config.py* (copied from *config.sample.py*): "VoiceRSS key" : 
 
 You can set the environment variable *VOICERSS_KEY* on the server or the Docker container.
 
+## Access control or not
+By default no access control. If you want minimal, single user one, set *"Access control"* to *True* in the config and the Login/Password. One day I'll use the DB, not tonight.
+
+
 ## Manual install
 1. git clone https://github.com/AlanFromJapan/dictee-tor
 1. python3 -m venv .
@@ -38,7 +42,7 @@ You can set the environment variable *VOICERSS_KEY* on the server or the Docker 
 1. deactivate
 1. bin/python dictee-tor.py
 
-## Docker container version
+## Docker container version install 
 Assuming you have Docker working on your PC:
 1. `git clone https://github.com/AlanFromJapan/dictee-tor`
 1. `copy config.sample.py config.py`

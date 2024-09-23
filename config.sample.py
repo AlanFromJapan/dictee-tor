@@ -41,5 +41,8 @@ myconfig = {
     #TCP port number to listen to
     "port" : 56788,
 
-    
+    #Use access control or not?
+    "Access control" : False,
+    "Login" : "admin",
+    "Password" : "admin",
 }
