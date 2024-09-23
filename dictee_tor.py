@@ -118,7 +118,7 @@ def new_dictee_page():
 
 @app.route("/dictee")
 def dictee_page():
-    if session["current word count"] <= 1:
+    if session["current word count"] < 1:
         #finished
         return redirect("/dictee_result")
 
