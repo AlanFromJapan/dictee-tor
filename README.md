@@ -44,6 +44,10 @@ Assuming you have Docker working on your PC:
 1. `copy config.sample.py config.py`
 1. EDIT YOUR Voice RSS token (see above↑) + other values of config.py
 1. `docker build -t dictee-tor .`
-1. `docker run --name dictee-container --env VOICERSS_KEY=<your_voicerss_token> -d dictee-tor`
+1. `docker run --name dictee-container --env VOICERSS_KEY=<your_voicerss_token> -p 56788:56788 -d dictee-tor`
     - In case you provide the environment variable, it will override whatever is in the config file. Pick according your usecase.
+    - -p [host]:[container] for port mapping
+And later on:
+- `docker container stop dictee-container` to stop it
+- `docker container start dictee-container` to (re)start it
 
