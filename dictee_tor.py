@@ -11,6 +11,8 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from config import myconfig
 import dbutils
 
+from bp_login.login import login_bp
+
 ########################################################################################
 ## Flask vars
 #
@@ -54,52 +56,7 @@ def text_to_speech(lang, message):
 
 ##########################################################################################
 #Login page
-@app.route('/login', methods=['POST', 'GET'])
-def do_login():
-    #if no access control, then no need to check
-    if not myconfig.get("Access control", False):
-        return redirect("home")
-
-    #Get shows the page, POST checks the login
-    if request.method == "GET":
-        return render_template("login01.html", pagename="login", isprod=True, message="")
-    else:
-        vLogin = request.form["login"].lower()
-        vPwd = request.form["pwd"]
-        
-        if vLogin == myconfig["Login"].lower() and vPwd == myconfig["Password"]:
-            #Login is correct
-            resp = make_response( redirect("home") )
-            
-            resp.set_cookie ('username', vLogin, expires=datetime.now() + timedelta(days=30))
-                
-            return resp
-        else:
-            #incorrect login
-            return render_template("login01.html", pagename="login", isprod=True, message="Login incorrect")
-
-
-@app.before_request
-def check_login():
-    #if no access control, then no need to check
-    if not myconfig.get("Access control", False):
-        return
-    
-    #if login page, no need to check
-    if request.path == "/login":
-        return
-
-    #if no cookie, then redirect to login
-    if 'username' not in request.cookies or request.cookies.get('username') != myconfig["Login"]:
-        return redirect("/login")
-
-
-@app.route('/logout')
-def logout():
-    resp = make_response( redirect("home") )
-    resp.delete_cookie('username')
-    #resp.set_cookie ('username', '', expires=0)
-    return resp
+app.register_blueprint(login_bp)
 
 ########################################################################################
 ## Web related functions
